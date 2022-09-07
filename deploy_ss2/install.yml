@@ -1,0 +1,9 @@
+---
+- name: installation 
+  hosts: 
+  remote_user: root
+
+  tasks:
+    - name: installation de 1
+
+    - name: installation de 2

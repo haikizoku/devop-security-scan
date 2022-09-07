@@ -1,0 +1,51 @@
+---
+- name: Add docker repositories
+  yum_repository: 
+    name: docker
+    description: docker
+    baseurl:
+    enabled: yes
+
+- name: Install docker engine
+  package:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+
+- name: Install docker-compose
+  get_url:
+
+- name: Enable and Start docker
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: Installation des paquets
+  apt:
+    pkg:
+    - docker.io
+    - python3-pip
+
+- name: INstallation ApiDocker Python 
+  pip:
+   name: 
+     - docker
+
+- name: Enable and Start docker
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: docker python
+  pip:
+    name: docker-py
+    executable: pip3
+
+- name: start docker
+  service:
+    name: docker
+    enabled: yes

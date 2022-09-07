@@ -1,0 +1,5 @@
+[docker-vm]
+192.168.19.145
+
+[docker-vm:vars]
+ansible_ssh_user=root ansible_ssh_private_key_file=~/root/.ssh/id_ecdsa

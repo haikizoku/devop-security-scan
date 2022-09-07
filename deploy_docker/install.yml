@@ -1,0 +1,41 @@
+# 
+---
+- name: Installation de Docker sur CentOs 7 
+- hosts: target_server
+
+
+- name: docker repositories
+  yum_repository:
+    name: docker
+    description: doker_nmap_pentest
+    baseurl: https://download.docker.com/linux/centos/7/x86_64/stable/
+    enabled: yes
+
+- name: docker GPG KEY
+  rpm_key:
+    key: https://download.docker.com/linux/centos/gpg
+    state: present
+
+- name: Install docker engine
+  package:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+
+- name: Enable and start docker
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: docker python
+  pip:
+    name: docker-py
+    executable: pip3
+
+- name: start docker
+  service:
+    name: docker
+    enabled: yes
