@@ -23,11 +23,13 @@ print ("Successfully connected to", host)
 
 sftp = client.open_sftp()
 print (sftp)
-sftp.put('vulmap-linux.py','/home/gn/destination.txt' )
+sftp.put('vulmap-linux.py','/home/gn/vulmap-linux.py' )
 sftp.close()
 print ("copied successfully!")
-   
-# redirecting all the output in cmd_output
-# variable
-cmd_output = stdout.read()
-print('log printing: ', command, cmd_output)
+
+
+
+# execute command on client 
+_stdin, _stdout, _stderr = client.exec_command('python3 /home/gn/vulmap-linux.py -a')
+print (_stdout.readlines())
+_stdin.close()
