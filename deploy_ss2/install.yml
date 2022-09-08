@@ -1,9 +1,7 @@
 ---
-- name: installation 
-  hosts: 
+- name: deploiement de vulmap
+  hosts: docker-vm
   remote_user: root
 
   tasks:
     - name: installation de 1
-
-    - name: installation de 2
