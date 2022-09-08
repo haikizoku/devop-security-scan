@@ -1,0 +1,30 @@
+---
+- name: Copie de de script
+  hosts: docker-vm
+  remote_user: docker
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Copy file vulmap
+      copy:
+        src: /home/ansible/projet_secure/devop-security-scan/deploy_ss2/main-linux.py
+        dest: /root/vulmap/main-linux.py
+        
+
+
+#- name: Deploiement de vulmap
+#  hosts: docker-vm
+#  remote_user: docker
+#  become: true
+#  become_method: sudo
+#  gather_facts: false
+
+
+
+#  tasks:
+#    - name: Copie du script
+#      copy: 'src=devop-security-scan/main-linux.py dest=/vulmap/main-linux.py'
+
+#    - name: Execution du script
+#      command: '/usr/bin/python  /vulmap/main-linux.py'

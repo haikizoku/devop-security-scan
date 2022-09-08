@@ -1,13 +1,2 @@
-[serveurs]
-192.168.19.145
-
-
-
-[postes clients]
-192.168.19.146
-
-
-
-
-[caisses]
-192.168.19.147
+[docker-vm]
+192.168.19.145 ansible_ssh_user=ansible ansible_ssh_pass=deploiementansible

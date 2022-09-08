@@ -9,14 +9,15 @@ if len( sys.argv ) > 1:
     password = "gn"
     port ="22"
 else:
-    host = "192.168.247.138"
-    username = "gn"
-    password = "gn"
+    host = "192.168.19.159"
+    username = "docker"
+    password = "123456"
     port ="22"
 
 
 #download last version of vulmap 
-os.system("wget https://raw.githubusercontent.com/vulmon/Vulmap/master/Vulmap-Windows/vulmap-windows.ps1")
+os.system("https://raw.githubusercontent.com/vulmon/Vulmap/master/Vulmap-Linux/vulmap-linux.py")
+#os.system("wget https://raw.githubusercontent.com/vulmon/Vulmap/master/Vulmap-Windows/vulmap-windows.ps1")
 
 
 # Create object of SSHClient and
