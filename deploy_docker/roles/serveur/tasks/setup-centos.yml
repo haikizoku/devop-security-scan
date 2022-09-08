@@ -1,0 +1,6 @@
+---
+
+- name: Chek for the correct OS distribution and version
+
+- name: Installation des paquets et prérequis
+  package: 
