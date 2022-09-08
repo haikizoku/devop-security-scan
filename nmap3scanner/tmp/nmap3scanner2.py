@@ -8,7 +8,7 @@ nmap = nmap3.Nmap()
 nmapscan = nmap3.NmapScanTechniques()
 
 #target = "192.168.1xx.xxx"
-target = input("[+] Enter the target you want to scan : ")
+#target = input("[+] Enter the target you want to scan : ")
 
 
 def top_port_scan(target) :
@@ -42,26 +42,26 @@ def syn_scan(target):
 #        print(results_syn_scan_json(row), file=outfile1)
  
 
-print(""" nmap3scanner """)
+#print(""" nmap3scanner """)
 
 
-ch = int(input("""
-    CHOOSE FROM THE FOLLOWING SCAN OPTIONS
-    [1] COMMON PORT SCAN
-    [2] TCP CONNECT SCAN ( -sT )   
-    [3] TCP SYN SCAN ( -sS )
-    [4] OS DETECTION ( -O ) {requires root privileges}
-    [5] VERSION DETECTION ( -sV ) {requires root privileges} : """))
+#ch = int(input("""
+#    CHOOSE FROM THE FOLLOWING SCAN OPTIONS
+#    [1] COMMON PORT SCAN
+#    [2] TCP CONNECT SCAN ( -sT )   
+#    [3] TCP SYN SCAN ( -sS )
+#    [4] OS DETECTION ( -O ) {requires root privileges}
+#    [5] VERSION DETECTION ( -sV ) {requires root privileges} : """))
 
-if ch==1:
-    top_port_scan(target)
-elif ch==2:
-    tcp_scan(target)
-elif ch==3:
-    syn_scan(target)
-elif ch==4:
-    os_detection(target)
-elif ch==5:
-    ver_detection(target)
-else:
-    print("INVALID OPTION")
+#if ch==1:
+#    top_port_scan(target)
+#elif ch==2:
+#    tcp_scan(target)
+#elif ch==3:
+#    syn_scan(target)
+#elif ch==4:
+#    os_detection(target)
+#elif ch==5:
+#    ver_detection(target)
+#else:
+#    print("INVALID OPTION")
