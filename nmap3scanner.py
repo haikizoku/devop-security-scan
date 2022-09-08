@@ -13,7 +13,7 @@ target = input("[+] Enter the target you want to scan : ")
 
 def top_port_scan(target) :
     results_top_port_scan = nmapscan.scan_top_ports(target)
-    print(json.dumps(results_top_port_scan , indent=4 , sort_keys=True))
+    print(json.dumps(results_top_port_scan , indent=4 , sort_keys=True))    #json.dumps convert into json
 
 def os_detection(target) :
     results_os_detection = nmapscan.nmap_os_detection(target)
@@ -25,7 +25,7 @@ def ver_detection(target):
 
 def tcp_scan(target):
     results_tcp_scan = nmapscan.nmap_tcp_scan(target)
-    print(json.dumps(results_tcp_scan , indent=4 , sort_keys=True))
+    print(json.dumps(results_tcp_scan , indent=4 , sort_keys=True))    
 
 def syn_scan(target):
     results_syn_scan = nmapscan.nmap_syn_scan(target)
@@ -37,10 +37,10 @@ print(""" nmap3scanner """)
 ch = int(input("""
     CHOOSE FROM THE FOLLOWING SCAN OPTIONS
     [1] COMMON PORT SCAN
-    [2] TCP SCAN ( -sT )   
+    [2] TCP CONNECT SCAN ( -sT )   
     [3] TCP SYN SCAN ( -sS )
     [4] OS DETECTION ( -O ) {requires root privileges}
-    [5] VERSION DETECTION ( -Sv ) {requires root privileges} : """))
+    [5] VERSION DETECTION ( -sV ) {requires root privileges} : """))
 
 if ch==1:
     top_port_scan(target)
