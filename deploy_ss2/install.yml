@@ -1,0 +1,7 @@
+---
+- name: deploiement de vulmap
+  hosts: docker-vm
+  remote_user: root
+
+  tasks:
+    - name: installation de 1

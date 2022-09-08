@@ -1,0 +1,175 @@
+---
+- name: Installation de Docker pour Centos 7
+  hosts: docker-vm
+  remote_user: docker
+  become: true
+  become_method: sudo
+  gather_facts: false
+  #vars_files:
+  #  - /home/ansible/projet_secure/devop-security-scan/deploy_docker/credentials.yml
+
+  tasks:
+    - name: Supprimer version antérieur de docker
+      yum:
+        name:
+          - docker
+          - docker-client
+          - docker-client-latest
+          - docker-common
+          - docker-latest
+          - docker-latest-logrotate
+          - docker-logrotate
+          - docker-engine
+        state: absent
+
+    - name: Installation des paquets et prérequis
+      yum:
+        name:
+          - wget
+          - git
+          - python3
+          - python3-pip
+          - yum-utils
+          - device-mapper-persistent-data
+          - lvm2
+        
+    - name: Ajout du repository docker
+      yum_repository:
+        name: docker
+        description: docker
+        baseurl: https://download.docker.com/linux/centos/7/x86_64/stable
+        enabled: yes
+
+    - name: Ajout de la clé GPG
+      rpm_key:
+        key: https://download.docker.com/linux/centos/gpg
+        state: present
+
+    - name: Installation de Docker engine
+      yum:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: present
+
+    - name: Vérifier si "/usr/local/bin/docker-compose" existe.
+      stat:
+        path: /usr/local/bin/docker-compose
+      register: docker_compose_file
+
+    - name: Obtenir les dernièeres versions de docker-compose 
+      shell:
+        cmd: curl --silent 'https://api.github.com/repos/docker/compose/releases/latest' |  grep '"tag_name":' | cut -d'"' -f4
+      register: docker_compose_latest_svn
+      changed_when: false
+      args:
+        warn: no
+    - set_fact:
+        docker_compose_latest: "{{ docker_compose_latest_svn.stdout }}"
+      when:
+        - docker_compose_latest_svn.stdout is defined
+
+    - name: Vérifier la version actuelle de docker-compose 
+      shell:
+        cmd: /usr/local/bin/docker-compose --version | cut -d ' ' -f3 | sed 's/.$//'
+      register: docker_compose_vsn
+      changed_when: false
+      failed_when: false
+      args:
+        warn: no
+      when:
+        - docker_compose_file.stat.exists
+
+    - set_fact:
+        docker_compose_current_version: "{{ docker_compose_vsn.stdout }}"
+      when:
+        - docker_compose_vsn.stdout is defined and docker_compose_file.stat.exists
+
+    - name: Installation oo upgrade de docker-compose
+      get_url:
+        url : "https://github.com/docker/compose/releases/download/{{ docker_compose_latest }}/docker-compose-Linux-x86_64"
+        dest: /usr/local/bin/docker-compose
+        mode: 'a+x'
+        force: yes
+      when: >
+        docker_compose_current_version is not defined
+        or docker_compose_current_version is version(docker_compose_latest, '<')
+
+    - name: "installing docker sdk for python"
+      command: "pip3 install docker"
+
+    - name: Installation de docker python
+      pip:
+        name: docker
+        executable: pip3
+
+
+    - name: Activation et démarrage du service docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Démarrage de docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: "Création du dossier et copie des fichiers dans le dossier"
+      file:
+        path: "/folder"
+        state: directory
+
+
+    - name: "Copie du fichier"
+      copy:
+        src: "web.html"
+        dest: "/folder/"
+
+    - name: "creating container"
+      docker_container:
+        name: "webserver"
+        image: "httpd"
+        state: started
+        exposed_ports:
+          - "80"
+        volumes:
+          - /folder:/usr/local/apache2/volume1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  #  - name: Creation du container apache
+  #    docker_container:
+  #      name: secure_app
+  #      image: httpd
+  #      state: started
+  #      exposed_ports:
+  #      - "80"
+  #      ports:
+  #      - "12:80"
+  #      volumes:
+  #      - /newfile:/usr/local/apache2/htdocs/
+    
+
+    
+    - name: "Force Install 'docker' pip module"
+      pip:
+        name: docker
+        extra_args: "--no-index --find-links={{ /folder/ }}"
+        state: forcereinstall

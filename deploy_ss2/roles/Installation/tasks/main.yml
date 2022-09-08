@@ -1,0 +1,44 @@
+---
+- name: Installation de ...
+
+# Installation des packages et autres
+# Bouclage avec les differents élementsde la commande par exemple 
+loop:
+    -
+    -
+    -
+    when: ansible_facts['os_family'] == "Debian"-
+
+
+- name: Installation de ...
+
+# Installation des packages et autres
+# Bouclage avec les differents élementsde la commande par exemple 
+loop:
+    -
+    -
+    -
+    when: ansible_facts['os_family'] == "Ubuntu"
+
+- name: Installation de ...
+
+# Installation des packages et autres
+# Bouclage avec les differents élementsde la commande par exemple 
+loop:
+    -
+    -
+    -
+    when: ansible_facts['os_family'] == "Windows"
+
+
+- name: Installation de ...
+
+# Installation des packages et autres
+# Bouclage avec les differents élementsde la commande par exemple 
+loop:
+    -
+    -
+    -
+    when: ansible_facts['os_family'] == "RedHat"
+
+

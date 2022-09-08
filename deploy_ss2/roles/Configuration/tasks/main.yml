@@ -1,0 +1,21 @@
+---
+- name: Ajout de
+  # cp vulmap-windows.py 
+  when: ansible_facts['ocs_family'] == "Windows"
+
+
+- name: Suppression de   
+  # cp vulmap-linux.py
+  when: ansible_facts['ocs_family'] == "Ubuntu"
+
+
+
+- name: Modification de
+  # cp vulmap-linux.py
+  when: ansible_facts['os_family'] == "Debian"
+
+#
+
+
+- name: Creation de 
+
