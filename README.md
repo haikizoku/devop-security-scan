@@ -3,7 +3,13 @@ Permettre au client  scanner son infrastructure et détecter les failles de séc
 
 ## nmap3scanner
 
-A fin de lancer nmap3scanner.py, c'est necessaire d'avoir installé: python3-nmap
+A fin de asurer la sécurité du système et observer leurs vulnérabilités.
+
+On cherche créer cet outil « nmap3scanner » pour faire un scanner et observer les ports ouvert dans un Target et pouvoir identifier par exemple: les protocoles, version, systèmes d’exploitation d’un ordinateur distant.
+
+nmap3scanner.py, 
+
+C'est necessaire d'avoir installé: python3-nmap
 
 ``` pip install python3-nmap ```
 
