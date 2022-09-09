@@ -1,22 +1,22 @@
 import paramiko
 import sys
 import os
+import host as configuration
 # Update the next three lines with your
 # server's information
 if len( sys.argv ) > 1:
     host = sys.argv[1]
-    username = "gn"
-    password = "gn"
+    username = sys.argv[2]
+    password = sys.argv[3]
     port ="22"
 else:
-    host = "192.168.247.138"
-    username = "gn"
-    password = "gn"
+    host = configuration.host
+    username = configuration.username
+    password = configuration.password
     port ="22"
 
-
 #download last version of vulmap 
-os.system("wget https://raw.githubusercontent.com/vulmon/Vulmap/master/Vulmap-Windows/vulmap-windows.ps1")
+os.system("wget https://raw.githubusercontent.com/vulmon/Vulmap/master/Vulmap-Linux/vulmap-linux.py")
 
 
 # Create object of SSHClient and
@@ -52,8 +52,8 @@ print ("script execution")
 # copy directory 
 sftp = client.open_sftp()
 print (sftp)
-local_path = str("/home/gn/Tp/devop-security-scan/result.txt")
-remote_path = str("/home/gn/vulmap/result.txt")
+local_path = configuration.local_path
+remote_path = configuration.remote_path
 sftp.get(remote_path,local_path)
 sftp.close()
 
