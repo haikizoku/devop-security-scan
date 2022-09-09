@@ -1,0 +1,10 @@
+version: '3.5'
+services:
+  client:
+    container_name: python-docker
+    build:
+      context: .
+    volumes:
+      - '.:/app-security-scan'
+    ports:
+      - '5000:5000'
