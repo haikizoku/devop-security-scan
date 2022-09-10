@@ -8,7 +8,7 @@ nmap = nmap3.Nmap()
 nmapscan = nmap3.NmapScanTechniques()
 
 #target = "192.168.1xx.xxx"
-target = input("[+] Enter the target you want to scan : ")
+target = input("Enter the IP adress that you want to scan : ")
 
 
 def top_port_scan(target) :
@@ -36,18 +36,15 @@ def syn_scan(target):
     results_syn_scan_json = json.dumps(results_syn_scan , indent=4 , sort_keys=True)
     print(results_syn_scan_json) 
 
-
-
 print(""" nmap3scanner """)
 
-
 ch = int(input("""
-    CHOOSE FROM THE FOLLOWING SCAN OPTIONS
-    [1] COMMON PORT SCAN
-    [2] TCP CONNECT SCAN ( -sT )   
-    [3] TCP SYN SCAN ( -sS )
-    [4] OS DETECTION ( -O ) {requires root privileges}
-    [5] VERSION DETECTION ( -sV ) {requires root privileges} : """))
+    Choose one of the following scan options:
+    [1] scan_top_ports
+    [2] TCP connect scan ( -sT )   
+    [3] TCP SYN SCAN ( -sS )                      # TCP Syn scan ou Half Open scan
+    [4] OS detection ( -O ) {requires root privileges}
+    [5] Version detection ( -sV ) {requires root privileges} : """))
 
 if ch==1:
     top_port_scan(target)
